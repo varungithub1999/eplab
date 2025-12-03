@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Engineering Physics Laboratory</title>
+<style>
+:root{
+ --brand:#112e51;
+ --muted:#6b7280;
+ --overlay:rgba(8,10,15,0.45);
+ --card-bg: #ffffff;
+ --radius:12px;
+ --max-width:1100px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family: "Merriweather", Georgia, serif;color:#0b1220;background:#fff;}
+a{color:var(--brand); text-decoration:none}
+a:hover{text-decoration:underline}
+
+.hero{
+ position:relative;
+ height:70vh;
+ min-height:420px;
+ display:flex;
+ align-items:center;
+ overflow:hidden;
+}
+
+/* slideshow images */
+.hero .slide{
+ position:absolute; inset:0; width:100%; height:100%;
+ background-size:cover; background-position:center center;
+ opacity:0; transition:opacity 1.6s ease; will-change:opacity;
+ z-index:0;
+}
+.hero .slide.active{opacity:1;}
+
+/* subtle dark gradient overlay across images */
+.hero::before{
+ content:""; position:absolute; inset:0;
+ background:linear-gradient(180deg, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.45) 100%);
+ pointer-events:none;
+}
+
+/* content overlay (left aligned) */
+.hero-content{
+ position:relative; z-index:6;
+ max-width:var(--max-width); margin-left:6vw; margin-right:6vw;
+ color:#fff; text-align:left;
+ display:flex; flex-direction:column; gap:12px;
+}
+
+/* textual styles */
+.site-eyebrow{ font-size:14px; color:rgba(255,255,255,0.85); font-weight:600; letter-spacing:1px; text-transform:uppercase;}
+.site-title{ font-size:clamp(28px,4.4vw,48px); line-height:1.05; font-weight:700; margin:0; color:white; text-shadow: 0 6px 18px rgba(2,6,23,0.45); }
+.site-sub{ font-size:clamp(14px,1.6vw,18px); color:rgba(255,255,255,0.92); max-width:60ch; }
+
+/* small top nav area (simulating university style) */
+.topbar{ display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 6vw; position:absolute; top:0; left:0; right:0; z-index:8; }
+.brand{ font-weight:700; color:white; background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)); padding:8px 12px; border-radius:8px; backdrop-filter: blur(4px); box-shadow: 0 2px 10px rgba(2,6,23,0.25); }
+
+/* rest of the page */
+main{ max-width:var(--max-width); margin:36px auto; padding:0 20px 80px; }
+section{ padding:36px 0; }
+h2{ text-align:left; color:var(--brand); margin:8px 0 18px; font-family: Georgia, 'Times New Roman', serif; }
+.grid{ display:grid; gap:20px; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); }
+.card{ background:var(--card-bg); border-radius:var(--radius); padding:20px; box-shadow:0 6px 22px rgba(15,23,42,0.06); transition:transform .18s ease, box-shadow .18s ease; }
+.card:hover{ transform:translateY(-6px); box-shadow:0 14px 40px rgba(11,22,45,0.08); }
+
+footer{ text-align:center; padding:22px; color:var(--muted); border-top:1px solid rgba(15,23,42,0.04); margin-top:36px; }
+
+/* responsive tweaks */
+@media (max-width:880px){
+ .hero-content{ margin-left:4vw; margin-right:4vw; }
+ .topbar{ padding:10px 4vw; }
+}
+
+@media (max-width:520px){
+ .topbar{ padding:8px 3vw; }
+ .site-title{ font-size:22px; }
+ .hero{ height:56vh; min-height:360px; }
+}
+
+/* accessibility: reduce motion */
+@media (prefers-reduced-motion: reduce){
+ .hero .slide{ transition:none; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="hero" aria-label="Engineering Physics Laboratory hero banner">
+ <div class="topbar">
+  <div class="brand">Institute of Science &amp; Technology</div>
+  
+ </div>
+
+ <!-- slides as background divs for better cover control -->
+ <div class="slide active" style="background-image:url('images/slide1.jpg')" role="img" aria-label="Lab image 1"></div>
+ <div class="slide" style="background-image:url('images/slide2.jpg')" role="img" aria-label="Lab image 2"></div>
+ <div class="slide" style="background-image:url('images/slide3.jpg')" role="img" aria-label="Lab image 3"></div>
+
+ <!-- Hero content left aligned -->
+ <div class="hero-content" role="region" aria-labelledby="lab-title">
+  <div class="site-eyebrow"></div>
+  <h1 id="lab-title" class="site-title">Engineering Physics Laboratory</h1>
+  <p class="site-sub">Hands‑on training in fundamental and advanced physics through precision instruments, experiments, and measurement techniques. We cultivate scientific thinking, experimental skills, and research aptitude among undergraduate engineering students.</p>
+ </div>
+</div>
+
+<main>
+ <section id="announcements">
+  <h2>Announcements</h2>
+  <div class="grid">
+   <div class="card">No new announcements.</div>
+  </div>
+ </section>
+
+ <section id="experiments">
+  <h2>Experiments</h2>
+  <div class="grid">
+   <div class="card">Verification of Ohm’s Law</div>
+   <div class="card">Newton’s Rings – Radius of Curvature</div>
+   <div class="card">Spectrometer – Diffraction Grating</div>
+   <div class="card">Photoelectric Effect</div>
+  </div>
+ </section>
+
+ <section id="resources">
+  <h2>Resources</h2>
+  <div class="grid">
+   <div class="card"><a href="manuals/experiment_manual.pdf">Experiment Manual (PDF)</a></div>
+   <div class="card"><a href="manuals/lab_safety_rules.pdf">Lab Safety Rules (PDF)</a></div>
+  </div>
+ </section>
+
+ <section id="faculty">
+  <h2>Faculty &amp; Staff</h2>
+  <div class="grid">
+   <div class="card"><b>Dr. Shiju. E</b><br>Assistant Professor, Institute of Science and Technology</div>
+   <div class="card"><b>Dr. Sayan Kumar Pal</b><br>Assistant Professor, Institute of Science and Technology</div>
+   <div class="card"><b>Adersh. J</b><br>Lab Instructor, Engineering Physics Lab</div>
+   <div class="card"><b>Varun Sarathi. M. T</b><br>Lab Instructor, Engineering Physics Lab</div>
+  </div>
+ </section>
+</main>
+
+<footer>© Engineering Physics Laboratory — Institute of Science &amp; Technology</footer>
+
+<script>
+// Simple fading slideshow - 5s per slide, smooth transition
+(function(){
+ const slides = Array.from(document.querySelectorAll('.hero .slide'));
+ let idx = 0;
+ const interval = 5000; // 5 seconds
+ let timer = null;
+ function show(next){
+  slides.forEach((s,i)=> s.classList.toggle('active', i===next));
+ }
+ function start(){
+  timer = setInterval(()=>{
+   idx = (idx + 1) % slides.length;
+   show(idx);
+  }, interval);
+ }
+ // start after small delay to allow images to load
+ window.addEventListener('load', ()=>{
+  // ensure first slide visible
+  show(idx);
+  start();
+ });
+
+ // pause on hover (desktop)
+ const hero = document.querySelector('.hero');
+ hero.addEventListener('mouseenter', ()=> clearInterval(timer));
+ hero.addEventListener('mouseleave', ()=> { clearInterval(timer); start(); });
+
+ // respect reduced motion
+ const rm = window.matchMedia('(prefers-reduced-motion: reduce)');
+ if(rm.matches){
+  clearInterval(timer);
+ }
+})();
+</script>
+
+</body>
+</html>
