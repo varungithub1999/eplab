@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>All Announcements</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{ font-family:system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; padding:24px; background:#f7f9fb; color:#0b162d }
+    .container{ max-width:900px; margin:0 auto; }
+    .announcement-card{ background:#fff;border-radius:12px;padding:18px;margin:12px 0;box-shadow:0 6px 20px rgba(11,22,45,0.06); }
+    .ann-badge-new{ background:#ff6b6b;color:#fff;padding:4px 8px;border-radius:999px;font-size:0.85rem;margin-left:10px; }
+    .ann-date{ color:#6b7280; float:right; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>All Announcements</h1>
+    <div id="all-list">Loading announcements...</div>
+    <p><a href="index.html">← Back to home</a></p>
+  </div>
+
+  <script>
+    (function(){
+      const JSON_PATH = './announcements.json';
+      function parseDate(d){ const t=new Date(d); return isNaN(t.getTime())?null:t; }
+      function isNew(d){ if(!d) return false; return (Date.now()-d.getTime()) <= 7*24*60*60*1000; }
+      function render(list){
+        const cont = document.getElementById('all-list'); cont.innerHTML='';
+        if(!list || !list.length) { cont.innerHTML='<p>No announcements.</p>'; return;}
+        list.forEach(item=>{
+          const d=parseDate(item.date);
+          const card = document.createElement('div'); card.className='announcement-card';
+          const header = document.createElement('div');
+          const h = document.createElement('h3'); h.style.margin='0'; h.textContent=item.title||'';
+          if(isNew(d)){ const b=document.createElement('span'); b.className='ann-badge-new'; b.textContent='New'; h.appendChild(b); }
+          const tm = document.createElement('div'); tm.className='ann-date'; tm.textContent = item.date || '';
+          header.appendChild(h); header.appendChild(tm);
+          card.appendChild(header);
+          const p = document.createElement('p'); p.textContent = item.description||''; card.appendChild(p);
+          if(item.link){
+            const a = document.createElement('a'); a.href=item.link; a.target='_blank'; a.textContent = item.link_text || 'View';
+            card.appendChild(a);
+          }
+          cont.appendChild(card);
+        });
+      }
+      fetch(JSON_PATH,{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(data=>{
+        const list = (Array.isArray(data)?data:[]).sort((a,b)=> new Date(b.date)-new Date(a.date));
+        render(list);
+      }).catch(e=>{ console.warn(e); render([]); });
+    })();
+  </script>
+</body>
+</html>
