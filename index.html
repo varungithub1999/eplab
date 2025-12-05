@@ -312,6 +312,79 @@ footer{ text-align:center; padding:22px; color:var(--muted); border-top:1px soli
   }
 }
 </style>
+<!-- STRONG MOBILE HERO OVERRIDE (paste right above </head>) -->
+<style>
+/* apply to phones + small tablets */
+@media (max-width: 1024px) {
+
+  /* make selectors extra-specific so they win over other rules */
+  html body .hero,
+  body .hero {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+
+  html body .hero .slides-track,
+  body .hero .slides-track {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Force slides into a responsive banner with padding-top ratio */
+  html body .hero .slides-track .slide,
+  body .hero .slides-track .slide {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 100px !important;
+    padding-top: 33% !important; /* shorter banner — reduce to 25% to shrink more */
+    background-size: cover !important;
+    background-position: center center !important;
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+  }
+
+  /* also make sure any .active/.hidden states don't hide slides on mobile */
+  html body .hero .slides-track .slide.active,
+  body .hero .slides-track .slide.active,
+  html body .hero .slides-track .slide,
+  body .hero .slides-track .slide {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* put hero content into normal flow under the banner */
+  html body .hero .hero-content,
+  body .hero .hero-content {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 5 !important;
+    margin: 12px 4vw !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
+  /* scale title/sub text down */
+  html body .site-title { font-size: 1.25rem !important; line-height:1.18 !important; }
+  html body .site-sub { font-size: 0.95rem !important; line-height:1.4 !important; }
+
+  /* Optional quick fallback: hide slideshow entirely on very narrow screens */
+  /* Uncomment the next line if you want the banner removed on phones:
+  html body .hero .slides-track { display:none !important; } */
+}
+</style>
 
 </head>
 <body>
