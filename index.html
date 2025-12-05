@@ -246,6 +246,72 @@ footer{ text-align:center; padding:22px; color:var(--muted); border-top:1px soli
 /* keep slides visible behind fade by ensuring background-size */
 .slides-track .slide{ background-size:cover; background-position:center center; }
 </style>
+<!-- MOBILE HERO FIX -->
+<style>
+@media (max-width: 880px) {
+
+  /* Hero should resize with its content */
+  .hero {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Slideshow container becomes normal block */
+  .slides-track {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  /* Slides become responsive banner */
+  .slides-track .slide {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 120px !important;
+    padding-top: 38% !important; /* Banner ratio, adjust 30–45% if needed */
+    background-size: cover !important;
+    background-position: center !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  /* Make sure active slide is visible on mobile */
+  .slides-track .slide.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Hero text joins normal flow */
+  .hero-content {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    z-index: 3 !important;
+    margin: 14px 4vw !important;
+    padding: 0 !important;
+    text-align: left !important;
+  }
+
+  /* Title + subtitle scaled down */
+  .site-title {
+    font-size: 1.3rem !important;
+    line-height: 1.2 !important;
+  }
+
+  .site-sub {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+  }
+}
+</style>
 
 </head>
 <body>
